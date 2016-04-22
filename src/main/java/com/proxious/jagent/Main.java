@@ -1,7 +1,5 @@
 package com.proxious.jagent;
 
-import org.apache.commons.codec.binary.Base64;
-import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +17,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.codec.binary.Base64;
+import org.json.JSONObject;
 
 public class Main {
 
@@ -161,7 +161,7 @@ public class Main {
 
                                 if (parameters.containsKey("command")) {
                                     if (commands.containsKey(parameters.get("command"))) {
-                                        Process p = Runtime.getRuntime().exec(config.getString("commands", parameters.get("command")) + " " + params);
+                                        Process p = Runtime.getRuntime().exec(config.getString("commands", parameters.get("command")).replaceAll("~", System.getProperty("user.home")) + " " + params);
                                         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                                         String s;
 
